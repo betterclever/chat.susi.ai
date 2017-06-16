@@ -12,6 +12,18 @@ let ActionTypes = ChatConstants.ActionTypes;
 
 let _Location = null;
 
+export const ws = new WebSocket('ws://127.0.0.1:9001');
+
+ws.onopen =  function open() {
+  //ws.send('connected');
+};
+ 
+ws.onmessage = function incoming(message) {
+  console.log(message);
+  console.log(message.data)
+  createMessage(message.data,"t_1");
+};
+
 export function createMessage(text, currentThreadID) {
   let message = ChatMessageUtils.getCreatedMessageData(text, currentThreadID);
   ChatAppDispatcher.dispatch({
@@ -116,6 +128,7 @@ export function createSUSIMessage(createdMessage, currentThreadID) {
     timeout: 3000,
     async: false,
     success: function (response) {
+      ws.send(JSON.stringify(response))
       receivedMessage.text = response.answers[0].actions[0].expression;
       receivedMessage.response = response;
       let actions = [];

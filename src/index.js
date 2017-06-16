@@ -4,7 +4,6 @@ import ChatApp from './components/ChatApp/ChatApp.react';
 import ForgotPassword from
 	'./components/Auth/ForgotPassword/ForgotPassword.react';
 import NotFound from './components/NotFound/NotFound.react'
-
 import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -41,3 +40,4 @@ ReactDOM.render(
 	<App />,
 	document.getElementById('root')
 );
+
